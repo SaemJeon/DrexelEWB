@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "198701861955",
+    "firebase_url": "https://drexel-ewb.firebaseio.com",
+    "project_id": "drexel-ewb",
+    "storage_bucket": "drexel-ewb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:198701861955:android:66e688d800dd8de26b98f6",
+        "android_client_info": {
+          "package_name": "com.example.drexel_ewb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "198701861955-c7l9pimhveano7dhthdr94dcuqq4tklr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkWpFDkfEtiWcOOYR2XRIrLALW2jvDAMo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "198701861955-c7l9pimhveano7dhthdr94dcuqq4tklr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
