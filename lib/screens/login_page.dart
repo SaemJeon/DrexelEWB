@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:drexel_ewb/components/login_field.dart';
 import 'package:drexel_ewb/components/login_button.dart';
 import 'package:drexel_ewb/constants.dart';
+import 'package:drexel_ewb/arguments.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -11,8 +13,22 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  String enteredEmail;
-  String enteredPassword;
+  String _email, _password;
+
+  Future signIn() async {
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      try {
+        FirebaseUser user = (await FirebaseAuth.instance
+                .signInWithEmailAndPassword(email: _email, password: _password))
+            .user;
+        Navigator.pushReplacementNamed(context, '/home',
+            arguments: ScreenArguments(user: user));
+      } catch (e) {
+        print(e.message);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
               LoginField(
                 hintText: 'Email',
                 onSaved: (String value) {
-                  setState(() {
-                    enteredEmail = value;
-                  });
+                  _email = value;
                 },
                 validator: (value) =>
                     value.isEmpty ? 'Email can\'t be empty' : null,
@@ -45,9 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
               LoginField(
                 hintText: 'Password',
                 onSaved: (String value) {
-                  setState(() {
-                    enteredPassword = value;
-                  });
+                  _password = value;
                 },
                 validator: (value) =>
                     value.isEmpty ? 'Passowrd can\'t be empty' : null,
@@ -58,8 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
               LoginButton(
                 text: 'Sign In',
                 onPressed: () {
-                  _formKey.currentState.save();
-                  _formKey.currentState.validate();
+                  signIn();
                 },
               ),
               SizedBox(

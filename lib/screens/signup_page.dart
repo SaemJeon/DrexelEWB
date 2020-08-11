@@ -10,11 +10,24 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreen extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
-  String newFirstName;
-  String newLastName;
-  String newEmail;
-  String newPassword;
-  String newReEnteredPassword;
+  String _newFirstName;
+  String _newLastName;
+  String _newEmail;
+  String _newPassword;
+  String _newReEnteredPassword;
+
+  Future signUp() async {
+    _formKey.currentState.save();
+    if (_formKey.currentState.validate()) {
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: _newEmail, password: _newPassword);
+        Navigator.pushNamed(context, '/');
+      } catch (e) {
+        print(e.message);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +47,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                 LoginField(
                   hintText: 'First Name',
                   onSaved: (String value) {
-                    setState(() {
-                      newFirstName = value;
-                    });
+                    _newFirstName = value;
                   },
                   validator: (value) =>
                       value.isEmpty ? 'First name can\'t be empty' : null,
@@ -44,9 +55,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                 LoginField(
                   hintText: 'Last Name',
                   onSaved: (String value) {
-                    setState(() {
-                      newLastName = value;
-                    });
+                    _newLastName = value;
                   },
                   validator: (value) =>
                       value.isEmpty ? 'Last name can\'t be empty' : null,
@@ -54,9 +63,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                 LoginField(
                   hintText: 'Email',
                   onSaved: (String value) {
-                    setState(() {
-                      newEmail = value;
-                    });
+                    _newEmail = value;
                   },
                   validator: (value) =>
                       value.isEmpty ? 'Email can\'t be empty' : null,
@@ -64,9 +71,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                 LoginField(
                   hintText: 'Password',
                   onSaved: (String value) {
-                    setState(() {
-                      newPassword = value;
-                    });
+                    _newPassword = value;
                   },
                   validator: (value) =>
                       value.isEmpty ? 'Passowrd can\'t be empty' : null,
@@ -74,15 +79,13 @@ class _SignUpScreen extends State<SignUpScreen> {
                 LoginField(
                   hintText: 'Re-enter Password',
                   onSaved: (String value) {
-                    setState(() {
-                      newReEnteredPassword = value;
-                    });
+                    _newReEnteredPassword = value;
                   },
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Please re-enter your password';
                     } else {
-                      if (newReEnteredPassword != newPassword) {
+                      if (_newReEnteredPassword != _newPassword) {
                         return 'Your password doesn\'t match';
                       }
                     }
@@ -91,11 +94,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                 LoginButton(
                   text: 'Sign Up',
                   onPressed: () {
-                    _formKey.currentState.save();
-                    print(newPassword);
-                    if (_formKey.currentState.validate()) {
-                      Navigator.pop(context);
-                    }
+                    signUp();
                   },
                 )
               ],
@@ -106,83 +105,3 @@ class _SignUpScreen extends State<SignUpScreen> {
     );
   }
 }
-
-// body: Container(
-//         padding: EdgeInsets.fromLTRB(24.0, 0, 24.0, 0),
-//         child: Form(
-//           key: _formKey,
-//           child: Column(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             crossAxisAlignment: CrossAxisAlignment.stretch,
-//             children: [
-//               LoginField(
-//                 hintText: 'First Name',
-//                 onSaved: (String value) {
-//                   setState(() {
-//                     newFirstName = value;
-//                   });
-//                 },
-//                 validator: (value) =>
-//                     value.isEmpty ? 'First name can\'t be empty' : null,
-//               ),
-//               LoginField(
-//                 hintText: 'Last Name',
-//                 onSaved: (String value) {
-//                   setState(() {
-//                     newLastName = value;
-//                   });
-//                 },
-//                 validator: (value) =>
-//                     value.isEmpty ? 'Last name can\'t be empty' : null,
-//               ),
-//               LoginField(
-//                 hintText: 'Email',
-//                 onSaved: (String value) {
-//                   setState(() {
-//                     newEmail = value;
-//                   });
-//                 },
-//                 validator: (value) =>
-//                     value.isEmpty ? 'Email can\'t be empty' : null,
-//               ),
-//               LoginField(
-//                 hintText: 'Password',
-//                 onSaved: (String value) {
-//                   setState(() {
-//                     newPassword = value;
-//                   });
-//                 },
-//                 validator: (value) =>
-//                     value.isEmpty ? 'Passowrd can\'t be empty' : null,
-//               ),
-//               LoginField(
-//                 hintText: 'Re-enter Password',
-//                 onSaved: (String value) {
-//                   setState(() {
-//                     newReEnteredPassword = value;
-//                   });
-//                 },
-//                 validator: (value) {
-//                   if (value.isEmpty) {
-//                     return 'Please re-enter your password';
-//                   } else {
-//                     if (newReEnteredPassword != newPassword) {
-//                       return 'Your password doesn\'t match';
-//                     }
-//                   }
-//                 },
-//               ),
-//               LoginButton(
-//                 text: 'Sign In',
-//                 onPressed: () {
-//                   _formKey.currentState.save();
-//                   print(newPassword);
-//                   if (_formKey.currentState.validate()) {
-//                     Navigator.pop(context);
-//                   }
-//                 },
-//               )
-//             ],
-//           ),
-//         ),
-//       ),
