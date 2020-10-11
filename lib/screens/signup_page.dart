@@ -73,8 +73,15 @@ class _SignUpScreen extends State<SignUpScreen> {
                   onSaved: (String value) {
                     _newPassword = value;
                   },
-                  validator: (value) =>
-                      value.isEmpty ? 'Passowrd can\'t be empty' : null,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please re-enter your password';
+                    } else {
+                      if (value.length < 6) {
+                        return 'Password should be at least 6 characters';
+                      }
+                    }
+                  },
                 ),
                 LoginField(
                   hintText: 'Re-enter Password',
