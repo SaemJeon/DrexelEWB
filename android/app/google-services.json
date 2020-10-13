@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "198701861955",
-    "firebase_url": "https://drexel-ewb.firebaseio.com",
-    "project_id": "drexel-ewb",
-    "storage_bucket": "drexel-ewb.appspot.com"
+    "project_number": "1044870082105",
+    "firebase_url": "https://drexel-ewb-bcb82.firebaseio.com",
+    "project_id": "drexel-ewb-bcb82",
+    "storage_bucket": "drexel-ewb-bcb82.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:198701861955:android:66e688d800dd8de26b98f6",
+        "mobilesdk_app_id": "1:1044870082105:android:eab181dc6449f2cd3f67e8",
         "android_client_info": {
           "package_name": "com.example.drexel_ewb"
         }
       },
       "oauth_client": [
         {
-          "client_id": "198701861955-c7l9pimhveano7dhthdr94dcuqq4tklr.apps.googleusercontent.com",
+          "client_id": "1044870082105-fcpif979l8p2jte216qfmqsju1qr8kag.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCkWpFDkfEtiWcOOYR2XRIrLALW2jvDAMo"
+          "current_key": "AIzaSyBzJv3mvRlOzifzaKZnG4-KSAgJAjSHVrY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "198701861955-c7l9pimhveano7dhthdr94dcuqq4tklr.apps.googleusercontent.com",
+              "client_id": "1044870082105-fcpif979l8p2jte216qfmqsju1qr8kag.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
